@@ -1,0 +1,23 @@
+Install VS Extensions: 
+go to tools -> extensions and updates -> online Get: Nunit 3 test adapter SpecFlow for Visual Studio 2017
+
+How to make Project:
+Open new console application for C#
+
+To Install Nuget Packages:
+right click ConsoleApp1 Package file -> manage NuGet Packages -> browse
+
+download the following: 
+Selenium.Support <-- get this first!!!!
+NUnit 
+NUnit3TestAdapter
+Selenium.Chrome.WebDriver -- make sure this is compatible with your CURRENT chrome versions (may differ) 
+Selenium.WebDriver 
+SpecFlow
+
+How To Test:
+Right click
+add New Item
+Specflow Feature File
+
+etc...
