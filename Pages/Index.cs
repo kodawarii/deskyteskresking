@@ -33,7 +33,19 @@ namespace deskyteskresking.Pages
         private By playersTab;
 
         /* Enter Names of Players */
+        private By player1 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(1) > input");
+        private By player2 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(2) > input");
+        private By player3;
+        private By player4;
+        private By player5;
+        private By player6;
+        private By player7;
+        private By player8;
 
+        private By startGameBtn = By.CssSelector("#submitButton");
+
+        /* PlayGameState Elements */
+        // ...
 
         /* Constructor */
         public Index(IWebDriver driver)
@@ -98,6 +110,40 @@ namespace deskyteskresking.Pages
                 default:
                     break;
             }
+        }
+
+        /* Enter Names of Players */
+        public void EnterNames(string name, int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    this.driver.FindElement(player1).SendKeys(name);
+                    break;
+                case 2:
+                    this.driver.FindElement(player2).SendKeys(name);
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /* Start the Game */
+        public void StartGame()
+        {
+            this.driver.FindElement(startGameBtn).Click();
         }
     }
 }
