@@ -22,6 +22,12 @@ namespace deskyteskresking
             index = new Pages.Index(driver);
         }
 
+        [BeforeScenario]
+        public void BeforeScenario()
+        {
+            // Do Things ...
+        }
+
         [Given(@"I am on the ReskyDeskTesking Web Application")]
         public void GivenIAmOnTheReskyDeskTeskingWebApplication()
         {
@@ -61,7 +67,15 @@ namespace deskyteskresking
         [Then(@"I should be on the PlayStage")]
         public void ThenIShouldBeOnThePlayStage()
         {
-            // Do bunch of asserts ...
+            // Call Assert Function on Page
+            index.AssertPlayGameState();
+        }
+
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            driver.Close();
+            driver.Quit();
         }
     }
 }

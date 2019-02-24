@@ -16,7 +16,7 @@ namespace deskyteskresking.Pages
 
         /* By Objects */
 
-        /* Number Of Players Selection */
+        /* 1 Number Of Players Selection */
         private By playerButton1 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(1) > li:nth-child(1) > button");
         private By playerButton2 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(1) > li:nth-child(2) > button");
         private By playerButton3 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(1) > li:nth-child(3) > button");
@@ -27,12 +27,13 @@ namespace deskyteskresking.Pages
         private By playerButton8 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(3) > li:nth-child(2) > button");
         private By playerButton8Plus = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(3) > li:nth-child(3) > button");
 
-        /* Number of Holes Selection */
+        /* 2 Number of Holes Selection */
         private By holeButton9 = By.CssSelector("#nineHoles");
         private By holeButton18 = By.CssSelector("#eighteenHoles");
         private By playersTab;
 
-        /* Enter Names of Players */
+        /* 3 Enter Names of Players */
+        private List<string> listOfPlayers = new List<string>();
         private By player1 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(1) > input");
         private By player2 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(2) > input");
         private By player3;
@@ -44,8 +45,13 @@ namespace deskyteskresking.Pages
 
         private By startGameBtn = By.CssSelector("#submitButton");
 
-        /* PlayGameState Elements */
-        // ...
+        /* 4 PlayGameState Elements */
+        private By holeScrollerHOLE = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span");
+        private By lastPlayedHole = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > span");
+
+        private string namesByCssPRE = "#root > div > header > div:nth-child(4) > div > div > div:nth-child(4) > table > tbody > tr:nth-child(";
+        private string namesByCssSUFF = ") > td:nth-child(1) > span";
+        private List<By> listOfPlayerByCssSelector = new List<By>();
 
         /* Constructor */
         public Index(IWebDriver driver)
@@ -115,13 +121,17 @@ namespace deskyteskresking.Pages
         /* Enter Names of Players */
         public void EnterNames(string name, int index)
         {
+            this.listOfPlayers.Add(name);
+
             switch (index)
             {
                 case 1:
                     this.driver.FindElement(player1).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "1" + namesByCssSUFF));
                     break;
                 case 2:
                     this.driver.FindElement(player2).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "2" + namesByCssSUFF));
                     break;
                 case 3:
                     break;
@@ -144,6 +154,22 @@ namespace deskyteskresking.Pages
         public void StartGame()
         {
             this.driver.FindElement(startGameBtn).Click();
+        }
+
+        /* Assert Things on PlayGameState*/
+        public void AssertPlayGameState()
+        {
+            /* Asserting Hole Scroller Number */
+            string actualValue = driver.FindElement(holeScrollerHOLE).Text.ToString();
+            Assert.AreEqual(actualValue, "◀   Hole 1   ▶");
+
+            /* Asserting players names */
+            for (int i = 0; i < listOfPlayerByCssSelector.Count; i++)
+            {
+                string actualPlayerName = driver.FindElement(listOfPlayerByCssSelector[i]).Text.ToString();
+                string expectedPlayerName = listOfPlayers[i];
+                Assert.AreEqual(actualPlayerName, expectedPlayerName);
+            }
         }
     }
 }
