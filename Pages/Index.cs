@@ -46,13 +46,15 @@ namespace deskyteskresking.Pages
         private By startGameBtn = By.CssSelector("#submitButton");
 
         /* 4 PlayGameState Elements */
+        // Basic Elements
         private By gameDetails = By.CssSelector("#root > div > header > div.banner > div");
         private By holeNavInitial = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div.holeBannerContainer > span.holeBannerNumberCell.holeNumber1.greyOutThisHole");
         private By holeScrollerArrowLEFT = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span > button.HoleArrowButton.disableLeftHoleArrowButton");
         private By holeScrollerArrowRIGHT = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span > button:nth-child(2)");
         private By holeScrollerHOLE = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span");
-        private By lastPlayedHole = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > span");
+        private By lastPlayedHole = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > span > b");
 
+        // List of Player Names
         private string namesByCssPRE = "#root > div > header > div:nth-child(4) > div > div > div:nth-child(4) > table > tbody > tr:nth-child(";
         private string namesByCssSUFF = ") > td:nth-child(1) > span";
         private List<By> listOfPlayerByCssSelector = new List<By>();
@@ -181,6 +183,10 @@ namespace deskyteskresking.Pages
             string actualValueScroller = this.driver.FindElement(holeScrollerHOLE).Text.ToString();
             Console.WriteLine("Asserting Hole Scroller Value");
             Assert.AreEqual(actualValueScroller, "◀   Hole 1   ▶");
+
+            /* Asserting last played hole */
+            Console.WriteLine("Asserting last played hole value");
+            Assert.AreEqual(this.driver.FindElement(lastPlayedHole).Text.ToString(), "1");
 
             /* Asserting players names */
             for (int i = 0; i < listOfPlayerByCssSelector.Count; i++)
