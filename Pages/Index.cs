@@ -46,6 +46,10 @@ namespace deskyteskresking.Pages
         private By startGameBtn = By.CssSelector("#submitButton");
 
         /* 4 PlayGameState Elements */
+        private By gameDetails = By.CssSelector("#root > div > header > div.banner > div");
+        private By holeNavInitial = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div.holeBannerContainer > span.holeBannerNumberCell.holeNumber1.greyOutThisHole");
+        private By holeScrollerArrowLEFT = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span > button.HoleArrowButton.disableLeftHoleArrowButton");
+        private By holeScrollerArrowRIGHT = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span > button:nth-child(2)");
         private By holeScrollerHOLE = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span");
         private By lastPlayedHole = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(3) > span");
 
@@ -156,20 +160,49 @@ namespace deskyteskresking.Pages
             this.driver.FindElement(startGameBtn).Click();
         }
 
-        /* Assert Things on PlayGameState*/
-        public void AssertPlayGameState()
+        /* Assert Intial state of PlayGameState*/
+        public void AssertInitialPlayGameState()
         {
+            /* Asserting game details */
+            string actualValueDetails = this.driver.FindElement(gameDetails).Text.ToString();
+            string expectedValueDetails = "Players: 2 | Holes: 9\r\n\r\nReset Game ↻";
+            Console.WriteLine("Asserting Game Details");
+            Assert.AreEqual(actualValueDetails, expectedValueDetails);
+
+            /* Asserting Hole Number-nav */
+            Console.WriteLine("Asserting Hole Number-nav");
+            Assert.AreEqual(HasClass(this.driver.FindElement(holeNavInitial), "greyOutThisHole"), "greyOutThisHole");
+
+            /* Asserting that left arrow is disabled */
+            Console.WriteLine("Asserting left Arrow disabled");
+            Assert.AreEqual(HasClass(this.driver.FindElement(holeScrollerArrowLEFT), "disableLeftHoleArrowButton"), "disableLeftHoleArrowButton");
+
             /* Asserting Hole Scroller Number */
-            string actualValue = driver.FindElement(holeScrollerHOLE).Text.ToString();
-            Assert.AreEqual(actualValue, "◀   Hole 1   ▶");
+            string actualValueScroller = this.driver.FindElement(holeScrollerHOLE).Text.ToString();
+            Console.WriteLine("Asserting Hole Scroller Value");
+            Assert.AreEqual(actualValueScroller, "◀   Hole 1   ▶");
 
             /* Asserting players names */
             for (int i = 0; i < listOfPlayerByCssSelector.Count; i++)
             {
-                string actualPlayerName = driver.FindElement(listOfPlayerByCssSelector[i]).Text.ToString();
+                string actualPlayerName = this.driver.FindElement(listOfPlayerByCssSelector[i]).Text.ToString();
                 string expectedPlayerName = listOfPlayers[i];
+                Console.WriteLine("Asserting Player Name, No: " + i.ToString());
                 Assert.AreEqual(actualPlayerName, expectedPlayerName);
             }
+        }
+
+        /* Private Methods */
+        private string HasClass(IWebElement element, string className)
+        {
+            string classes = element.GetAttribute("class");
+            foreach (string s in classes.Split(' ')){
+                if (s.Equals(className))
+                {
+                    return className;
+                }
+            }
+            return "";
         }
     }
 }

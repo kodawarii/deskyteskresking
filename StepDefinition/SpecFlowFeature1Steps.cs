@@ -68,7 +68,7 @@ namespace deskyteskresking
         public void ThenIShouldBeOnThePlayStage()
         {
             // Call Assert Function on Page
-            index.AssertPlayGameState();
+            index.AssertInitialPlayGameState();
         }
 
         [AfterScenario]
