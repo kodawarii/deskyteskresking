@@ -30,6 +30,12 @@ namespace deskyteskresking
             // Do Things ...
         }
 
+        [Given(@"the app works")]
+        public void GivenTheAppWorks()
+        {
+            // ...
+        }
+
         [Given(@"I am on the ReskyDeskTesking Web Application")]
         public void GivenIAmOnTheReskyDeskTeskingWebApplication()
         {

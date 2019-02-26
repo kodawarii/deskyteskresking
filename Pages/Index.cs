@@ -49,6 +49,8 @@ namespace deskyteskresking.Pages
         // Basic Elements
         private By gameDetails = By.CssSelector("#root > div > header > div.banner > div");
         private By holeNavInitial = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div.holeBannerContainer > span.holeBannerNumberCell.holeNumber1.greyOutThisHole");
+        private By holeNavFinalHole9 = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div.holeBannerContainer > span.holeBannerNumberCell.holeNumber9");
+        private By holeNavFinalHole18 = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div.holeBannerContainer > span.holeBannerNumberCell.holeNumber18");
         private By holeScrollerArrowLEFT = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span > button.HoleArrowButton.disableLeftHoleArrowButton");
         private By holeScrollerArrowRIGHT = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span > button:nth-child(2)");
         private By holeScrollerHOLE = By.CssSelector("#root > div > header > div:nth-child(4) > div > div > div:nth-child(1) > div:nth-child(2) > span");
@@ -186,6 +188,17 @@ namespace deskyteskresking.Pages
             /* Asserting Hole Number-nav */
             Console.WriteLine("Asserting Hole Number-nav");
             Assert.AreEqual(HasClass(this.driver.FindElement(holeNavInitial), "greyOutThisHole"), "greyOutThisHole");
+
+            /* Assert last hole is as selected either 9 or 18 */
+            Console.WriteLine("Asserting last hole number-nav");
+            if (holes.Equals("18"))
+            {
+                Assert.AreEqual(this.driver.FindElement(holeNavFinalHole18).Text.ToString(), holes);
+            }
+            else
+            {
+                Assert.AreEqual(this.driver.FindElement(holeNavFinalHole9).Text.ToString(), holes);
+            }
 
             /* Asserting that left arrow is disabled */
             Console.WriteLine("Asserting left Arrow disabled");
