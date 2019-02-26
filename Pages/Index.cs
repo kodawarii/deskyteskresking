@@ -36,12 +36,12 @@ namespace deskyteskresking.Pages
         private List<string> listOfPlayers = new List<string>();
         private By player1 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(1) > input");
         private By player2 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(2) > input");
-        private By player3;
-        private By player4;
-        private By player5;
-        private By player6;
-        private By player7;
-        private By player8;
+        private By player3 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(3) > input");
+        private By player4 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(4) > input");
+        private By player5 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(5) > input");
+        private By player6 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(6) > input");
+        private By player7 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(7) > input");
+        private By player8 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(8) > input");
 
         private By startGameBtn = By.CssSelector("#submitButton");
 
@@ -140,16 +140,28 @@ namespace deskyteskresking.Pages
                     this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "2" + namesByCssSUFF));
                     break;
                 case 3:
+                    this.driver.FindElement(player3).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "3" + namesByCssSUFF));
                     break;
                 case 4:
+                    this.driver.FindElement(player4).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "4" + namesByCssSUFF));
                     break;
                 case 5:
+                    this.driver.FindElement(player5).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "5" + namesByCssSUFF));
                     break;
                 case 6:
+                    this.driver.FindElement(player6).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "6" + namesByCssSUFF));
                     break;
                 case 7:
+                    this.driver.FindElement(player7).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "7" + namesByCssSUFF));
                     break;
                 case 8:
+                    this.driver.FindElement(player8).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "8" + namesByCssSUFF));
                     break;
                 default:
                     break;
@@ -163,11 +175,11 @@ namespace deskyteskresking.Pages
         }
 
         /* Assert Intial state of PlayGameState*/
-        public void AssertInitialPlayGameState()
+        public void AssertInitialPlayGameState(string players, string holes)
         {
             /* Asserting game details */
             string actualValueDetails = this.driver.FindElement(gameDetails).Text.ToString();
-            string expectedValueDetails = "Players: 2 | Holes: 9\r\n\r\nReset Game ↻";
+            string expectedValueDetails = "Players: " + players + " | Holes: " + holes + "\r\n\r\nReset Game ↻";
             Console.WriteLine("Asserting Game Details");
             Assert.AreEqual(actualValueDetails, expectedValueDetails);
 

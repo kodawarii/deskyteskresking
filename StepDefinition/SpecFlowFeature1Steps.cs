@@ -10,6 +10,8 @@ namespace deskyteskresking
     public class SpecFlowFeature1Steps
     {
         private IWebDriver driver;
+        private string players;
+        private string holes;
 
         private Pages.Index index;
 
@@ -38,25 +40,22 @@ namespace deskyteskresking
         public void GivenISelectForTheAmountOfPlayers(int p0)
         {
             index.SelectNumberOfPlayer(p0);
+            players = p0.ToString();
         }
         
         [Given(@"I select (.*) for the hole count")]
         public void GivenISelectForTheHoleCount(int p0)
         {
             index.SelectNumberOfHoles(p0);
+            holes = p0.ToString();
         }
 
-        [Given(@"I enter (.*)")]
-        public void GivenIEnter(string p0)
+        [Given(@"I enter (.*) for name (.*)")]
+        public void GivenIEnterForName(string p0, int p1)
         {
-            index.EnterNames(p0, 1);
+            index.EnterNames(p0, p1);
         }
 
-        [Given(@"I also enter (.*)")]
-        public void GivenIAlsoEnter(string p0)
-        {
-            index.EnterNames(p0, 2);
-        }
 
         [When(@"I press start game")]
         public void WhenIPressStartGame()
@@ -68,7 +67,7 @@ namespace deskyteskresking
         public void ThenIShouldBeOnThePlayStage()
         {
             // Call Assert Function on Page
-            index.AssertInitialPlayGameState();
+            index.AssertInitialPlayGameState(players, holes);
         }
 
         [AfterScenario]
