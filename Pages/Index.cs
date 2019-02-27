@@ -25,7 +25,7 @@ namespace deskyteskresking.Pages
         private By playerButton6 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(2) > li:nth-child(3) > button");
         private By playerButton7 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(3) > li:nth-child(1) > button");
         private By playerButton8 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(3) > li:nth-child(2) > button");
-        private By playerButton8Plus = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(3) > li:nth-child(3) > button");
+        private By playerButton9 = By.CssSelector("#root > div > header > div:nth-child(4) > form > ul:nth-child(3) > li:nth-child(3) > button");
 
         /* 2 Number of Holes Selection */
         private By holeButton9 = By.CssSelector("#nineHoles");
@@ -42,6 +42,7 @@ namespace deskyteskresking.Pages
         private By player6 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(6) > input");
         private By player7 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(7) > input");
         private By player8 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(8) > input");
+        private By player9 = By.CssSelector("#root > div > header > div:nth-child(4) > form > div:nth-child(9) > input");
 
         private By startGameBtn = By.CssSelector("#submitButton");
 
@@ -103,7 +104,7 @@ namespace deskyteskresking.Pages
                     this.driver.FindElement(playerButton8).Click();
                     break;
                 case 9:
-                    this.driver.FindElement(playerButton8Plus).Click();
+                    this.driver.FindElement(playerButton9).Click();
                     break;
                 default:
                     break;
@@ -164,6 +165,10 @@ namespace deskyteskresking.Pages
                 case 8:
                     this.driver.FindElement(player8).SendKeys(name);
                     this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "8" + namesByCssSUFF));
+                    break;
+                case 9:
+                    this.driver.FindElement(player9).SendKeys(name);
+                    this.listOfPlayerByCssSelector.Add(By.CssSelector(namesByCssPRE + "9" + namesByCssSUFF));
                     break;
                 default:
                     break;

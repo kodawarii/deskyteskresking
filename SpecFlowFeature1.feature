@@ -27,9 +27,9 @@ Scenario: S2: Create New Game Scorecard for 1 player and 9 holes
 	Then I should be on the PlayStage
 
 @Third Scenario
-Scenario: S3: Create New Game Scorecard for 8 players and 9 holes
+Scenario: S3: Create New Game Scorecard for 9 players and 9 holes
 	Given the app works
-	And I select 8 for the amount of players
+	And I select 9 for the amount of players
 	And I select 9 for the hole count
 	And I enter Paul for name 1
 	And I enter Shiv for name 2
@@ -39,13 +39,14 @@ Scenario: S3: Create New Game Scorecard for 8 players and 9 holes
 	And I enter Zoren for name 6
 	And I enter Neil for name 7
 	And I enter Kayne for name 8
+	And I enter Moron for name 9
 	When I press start game
 	Then I should be on the PlayStage
 
 @Fourth Scenario
-Scenario: S4: Create New Game Scorecard for 8 players and 18 holes
+Scenario: S4: Create New Game Scorecard for 9 players and 18 holes
 	Given the app works
-	And I select 8 for the amount of players
+	And I select 9 for the amount of players
 	And I select 18 for the hole count
 	And I enter Paul for name 1
 	And I enter Shiv for name 2
@@ -55,5 +56,6 @@ Scenario: S4: Create New Game Scorecard for 8 players and 18 holes
 	And I enter Zoren for name 6
 	And I enter Neil for name 7
 	And I enter Kayne for name 8
+	And I enter Moron for name 9
 	When I press start game
 	Then I should be on the PlayStage
